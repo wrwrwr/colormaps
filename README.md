@@ -41,21 +41,19 @@ of the elements:
 If you would want to give users a choice of a colors scheme you may use a
 predefined set of maps:
 
-```html
-<script type="module">
-    import * as maps from 'colormaps/sets/cb/qualitative.js'
+```javascript
+import * as maps from 'colormaps/sets/cb/qualitative.js'
 
-    const select = document.querySelector('select')
-    for (const key of Object.keys(maps)) {
-        const option = document.createElement('option')
-        option.value = key
-        option.textContent = key
-        select.appendChild(option)
-    }
-    select.addEventListener('change', () => {
-        const map = maps[select.value]
-    })
-</script>
+const select = document.querySelector('select')
+for (const key of Object.keys(maps)) {
+    const option = document.createElement('option')
+    option.value = key
+    option.textContent = key
+    select.appendChild(option)
+}
+select.addEventListener('change', () => {
+    const map = maps[select.value]
+})
 ```
 
 ### Overriding default parameters
