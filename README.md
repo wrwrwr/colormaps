@@ -82,8 +82,8 @@ factory(defaults, 2)  // [[0, .5, .4], [1, 1, .4]]
 
 There is a visual index of all defined [maps] and [sets].
 
-[maps]: index.html
-[sets]: index.html?sets
+[maps]: https://wrwrwr.github.io/colormaps/index.html
+[sets]: https://wrwrwr.github.io/colormaps/index.html?sets
 
 ### References
 
@@ -216,7 +216,7 @@ const grays2 = [grays, {gamma: 2}]
 
 Unit tests may be run [directly in browser][tests].
 
-[tests]: tests.html
+[tests]: https://wrwrwr.github.io/colormaps/tests.html
 
 ## Further
 
