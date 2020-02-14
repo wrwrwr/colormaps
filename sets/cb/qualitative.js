@@ -1,0 +1,8 @@
+export {default as accent} from '../../maps/mpl/accent.js'
+export {default as dark2} from '../../maps/mpl/dark2.js'
+export {default as paired} from '../../maps/mpl/paired.js'
+export {default as pastel1} from '../../maps/mpl/pastel1.js'
+export {default as pastel2} from '../../maps/mpl/pastel2.js'
+export {default as set1} from '../../maps/mpl/set1.js'
+export {default as set2} from '../../maps/mpl/set2.js'
+export {default as set3} from '../../maps/mpl/set3.js'

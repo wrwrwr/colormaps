@@ -1,0 +1,5 @@
+export {default as cividis} from '../../maps/mpl/cividis.js'
+export {default as inferno} from '../../maps/mpl/inferno.js'
+export {default as magma} from '../../maps/mpl/magma.js'
+export {default as plasma} from '../../maps/mpl/plasma.js'
+export {default as viridis} from '../../maps/mpl/viridis.js'

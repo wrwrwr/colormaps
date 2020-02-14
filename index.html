@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Maps and Sets Index</title>
+    </head>
+    <body>
+        <div id="container"></div>
+        <style>
+            #container {
+                display: flex;
+                flex-direction: column;
+                font-family: monospace;
+            }
+
+            #container > div {
+                display: flex;
+                margin: 5px 0 12px;
+            }
+
+            #container > div > div {
+                flex-grow: 1;
+                height: 20px;
+            }
+        </style>
+        <script type="module">
+            import * as mdirs from './maps/index.js'
+            import * as sdirs from './sets/index.js'
+            import {cssmap} from './index.js'
+
+            const container = document.querySelector('#container')
+            const domain = new Array(100).fill().map((_, i) => i)
+
+            if (new URL(location.href).searchParams.has('sets')) {
+                for (const [dkey, dir] of Object.entries(sdirs)) {
+                    for (const [skey, set] of Object.entries(dir)) {
+                        const header = document.createElement('h2')
+                        header.textContent = dkey + '/' + skey
+                        container.appendChild(header)
+                        for (const [mkey, map] of Object.entries(set)) {
+                            bar(mkey, map)
+                        }
+                    }
+                }
+            } else {
+                for (const [dkey, dir] of Object.entries(mdirs)) {
+                    for (const [mkey, map] of Object.entries(dir)) {
+                        bar(dkey + '/' + mkey, map)
+                    }
+                }
+            }
+
+            function bar(key, map) {
+                const label = document.createElement('label')
+                label.textContent = key
+                container.appendChild(label)
+                const bar = document.createElement('div')
+                const colors = cssmap(domain, map)
+                for (const i of domain) {
+                    const rect = document.createElement('div')
+                    rect.style.backgroundColor = colors.get(i)
+                    bar.appendChild(rect)
+                }
+                container.appendChild(bar)
+            }
+        </script>
+    </body>
+</html>

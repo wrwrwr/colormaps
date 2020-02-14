@@ -1,0 +1,6 @@
+export {default as blues} from '../../maps/mpl/blues.js'
+export {default as greens} from '../../maps/mpl/greens.js'
+export {default as greys} from '../../maps/mpl/greys.js'
+export {default as oranges} from '../../maps/mpl/oranges.js'
+export {default as purples} from '../../maps/mpl/purples.js'
+export {default as reds} from '../../maps/mpl/reds.js'
