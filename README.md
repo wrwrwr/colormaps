@@ -20,18 +20,17 @@ Running the examples requires a browser with [support for ES6 modules].
 ### Colorizing HTML elements
 
 Suppose you have a number of nodes that you want to colorize – import a map
-from `maps` and use the `cssmap` helper to get a `Map` with a color for each
-of the elements:
+from `maps` and use the `colors` helper to get an array of CSS colors:
 
 ```html
 <script type="module">
-    import {cssmap} from 'colormaps/index.js'
+    import {colors} from 'colormaps/index.js'
     import viridis from 'colormaps/maps/mpl/viridis.js'
 
     const items = document.querySelectorAll('div')
-    const colors = cssmap(items, viridis)
-    for (const item of items) {
-        item.style.backgroundColor = colors.get(item)
+    const bcolors = colors(items.length, viridis)
+    for (const [index, item] of items.entries()) {
+        item.style.backgroundColor = bcolors[index]
     }
 </script>
 ```
@@ -61,15 +60,34 @@ select.addEventListener('change', () => {
 Some of the maps can be tuned:
 
 ```javascript
+import {colors} from 'colormaps/index.js'
 import cubehelix from 'colormaps/maps/mpl/cubehelix.js'
 
-const colors = cssmap(items, cubehelix, {gamma: 3, hue: 2})
+colors(8, cubehelix, {gamma: 3, hue: 2})
+```
+
+### Other output modes
+
+The helper may also be used produce color codes that can be used in Bash
+scripting and similar environments:
+
+```javascript
+import {colors} from 'colormaps/index.js'
+import wistia from 'colormaps/maps/mpl/wistia.js'
+
+colors(3, wistia, {}, 'term')
+```
+
+You could then prefix letters or words with the returned strings:
+
+```bash
+echo -e '\033[38;2;228;255;122mA \033[38;2;255;189;0mB \033[38;2;252;127;0mC'
 ```
 
 ### Using factories directly
 
-In case you would need the colors for something other than painting nodes
-you may use the factories directly:
+In case you would need the colors for something other than painting nodes or
+generating terminal escape sequences you may use the factories directly:
 
 ```javascript
 import cmap from 'colormaps/maps/mpl/summer.js'
@@ -220,7 +238,6 @@ Unit tests may be run [directly in browser][tests].
 
 ## Further
 
-* Think over and document the output argument.
 * Prepare a bundle or describe how to bundle.
 * Importer for the [JSON format].
 * Importers for other sources.

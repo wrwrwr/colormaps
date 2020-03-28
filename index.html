@@ -27,10 +27,9 @@
         <script type="module">
             import * as mdirs from './maps/index.js'
             import * as sdirs from './sets/index.js'
-            import {cssmap} from './index.js'
+            import {colors} from './index.js'
 
             const container = document.querySelector('#container')
-            const domain = new Array(100).fill().map((_, i) => i)
 
             if (new URL(location.href).searchParams.has('sets')) {
                 for (const [dkey, dir] of Object.entries(sdirs)) {
@@ -56,10 +55,10 @@
                 label.textContent = key
                 container.appendChild(label)
                 const bar = document.createElement('div')
-                const colors = cssmap(domain, map)
-                for (const i of domain) {
+                const bcolors = colors(100, map)
+                for (let i = 0; i < 100; i += 1) {
                     const rect = document.createElement('div')
-                    rect.style.backgroundColor = colors.get(i)
+                    rect.style.backgroundColor = bcolors[i]
                     bar.appendChild(rect)
                 }
                 container.appendChild(bar)
