@@ -17,10 +17,31 @@ Running the examples requires a browser with [support for ES6 modules].
 
 [support for ES6 modules]: https://caniuse.com/#feat=es6-module
 
-### Colorizing HTML elements
+### An array of RGB values
 
-Suppose you have a number of nodes that you want to colorize – import a map
-from `maps` and use the `colors` helper to get an array of CSS colors:
+For a start, import the `colors` helper and a colormap from `maps`:
+
+```javascript
+import {colors} from 'colormaps/index.js'
+import gray from 'colormaps/maps/mpl/gray.js'
+
+colors(3, gray)  // [[0, 0, 0], [.5, .5, .5], [1, 1, 1]]
+```
+
+### Tuning colormaps
+
+Some of the maps take parameters:
+
+```javascript
+import {colors} from 'colormaps/index.js'
+import cubehelix from 'colormaps/maps/mpl/cubehelix.js'
+
+colors(3, cubehelix, {gamma: 3, hue: 2})
+```
+
+### Styling HTML
+
+The helper can return CSS colors:
 
 ```html
 <script type="module">
@@ -28,11 +49,29 @@ from `maps` and use the `colors` helper to get an array of CSS colors:
     import viridis from 'colormaps/maps/mpl/viridis.js'
 
     const items = document.querySelectorAll('div')
-    const bcolors = colors(items.length, viridis)
+    const bcolors = colors(items.length, viridis, {}, 'css')
     for (const [index, item] of items.entries()) {
         item.style.backgroundColor = bcolors[index]
     }
 </script>
+```
+
+### Terminal codes
+
+The helper may also be used to produce escape sequences can be used in xterm
+scripting and similar environments:
+
+```javascript
+import {colors} from 'colormaps/index.js'
+import wistia from 'colormaps/maps/mpl/wistia.js'
+
+colors(3, wistia, {}, 'term')
+```
+
+You could then prefix letters or words with the returned codes:
+
+```bash
+echo -e '\033[38;2;228;255;122mA \033[38;2;255;189;0mB \033[38;2;252;127;0mC'
 ```
 
 ### Providing a palette choice
@@ -53,47 +92,6 @@ for (const key of Object.keys(maps)) {
 select.addEventListener('change', () => {
     const map = maps[select.value]
 })
-```
-
-### Overriding default parameters
-
-Some of the maps can be tuned:
-
-```javascript
-import {colors} from 'colormaps/index.js'
-import cubehelix from 'colormaps/maps/mpl/cubehelix.js'
-
-colors(8, cubehelix, {gamma: 3, hue: 2})
-```
-
-### Other output modes
-
-The helper may also be used produce color codes that can be used in Bash
-scripting and similar environments:
-
-```javascript
-import {colors} from 'colormaps/index.js'
-import wistia from 'colormaps/maps/mpl/wistia.js'
-
-colors(3, wistia, {}, 'term')
-```
-
-You could then prefix letters or words with the returned strings:
-
-```bash
-echo -e '\033[38;2;228;255;122mA \033[38;2;255;189;0mB \033[38;2;252;127;0mC'
-```
-
-### Using factories directly
-
-In case you would need the colors for something other than painting nodes or
-generating terminal escape sequences you may use the factories directly:
-
-```javascript
-import cmap from 'colormaps/maps/mpl/summer.js'
-
-const [factory, defaults] = cmap
-factory(defaults, 2)  // [[0, .5, .4], [1, 1, .4]]
 ```
 
 ## Maps and sets

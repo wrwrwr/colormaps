@@ -1,15 +1,24 @@
+import {colors} from '../index.js'
 import linear from '../factories/linear.js'
 import repeat from '../factories/repeat.js'
 import rfunc from '../factories/rfunc.js'
 import cubehelix from '../maps/mpl/cubehelix.js'
-import summer from '../maps/mpl/summer.js'
+import gray from '../maps/mpl/gray.js'
+import wistia from '../maps/mpl/wistia.js'
 
 suite("examples", () => {
-    test("using factories", () => {
-        const [factory, defaults] = summer
-        factory(defaults, 2).should.eql(
-            [[0, .5, .4], [1, 1, .4]]
+    test("raw", () => {
+        colors(3, gray).should.eql(
+            [[0, 0, 0], [.5, .5, .5], [1, 1, 1]]
         )
+    })
+
+    test("term", () => {
+        colors(3, wistia, {}, 'term').should.eql([
+            '\\033[38;2;228;255;122m',
+            '\\033[38;2;255;189;0m',
+            '\\033[38;2;252;127;0m'
+        ])
     })
 
     test("linear: nonuniform", () => {

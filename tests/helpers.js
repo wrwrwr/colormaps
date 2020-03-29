@@ -8,10 +8,10 @@ suite("helpers", () => {
             []
         )
         colors(1, cmap).should.eql(
-            ['rgb(100%, 50%, 0%)']
+            [[1, .5, 0]]
         )
         colors(2, cmap).should.eql(
-            ['rgb(100%, 50%, 0%)', 'rgb(100%, 50%, 0%)']
+            [[1, .5, 0], [1, .5, 0]]
         )
     })
 
@@ -20,10 +20,22 @@ suite("helpers", () => {
             []
         )
         colors(1, cmap, {color: [.2, 0, 0]}).should.eql(
-            ['rgb(20%, 0%, 0%)']
+            [[.2, 0, 0]]
         )
         colors(2, cmap, {color: [.2, 0, 0]}).should.eql(
-            ['rgb(20%, 0%, 0%)', 'rgb(20%, 0%, 0%)']
+            [[.2, 0, 0], [.2, 0, 0]]
+        )
+    })
+
+    test("colors css", () => {
+        colors(0, cmap, {}, 'css').should.eql(
+            []
+        )
+        colors(1, cmap, {}, 'css').should.eql(
+            ['rgb(100%, 50%, 0%)']
+        )
+        colors(2, cmap, {}, 'css').should.eql(
+            ['rgb(100%, 50%, 0%)', 'rgb(100%, 50%, 0%)']
         )
     })
 
