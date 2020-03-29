@@ -1,3 +1,3 @@
-export function round(colors) {
-    return colors.map(c => c.map(v => Number(v.toPrecision(6))))
+export function round(colors, precision = 6) {
+    return colors.map(c => c.map(v => Number(v.toPrecision(precision))))
 }

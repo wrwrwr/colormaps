@@ -5,11 +5,21 @@ import rfunc from '../factories/rfunc.js'
 import cubehelix from '../maps/mpl/cubehelix.js'
 import gray from '../maps/mpl/gray.js'
 import wistia from '../maps/mpl/wistia.js'
+import {round} from './utils.js'
 
 suite("examples", () => {
     test("raw", () => {
         colors(3, gray).should.eql(
             [[0, 0, 0], [.5, .5, .5], [1, 1, 1]]
+        )
+    })
+
+    test("args", () => {
+        round(colors(3, cubehelix), 2).should.eql(
+            [[0, 0, 0], [.63, .47, .29], [1, 1, 1]]
+        )
+        round(colors(3, cubehelix, {gamma: 1.1}), 2).should.eql(
+            [[0, 0, 0], [.59, .44, .25], [1, 1, 1]]
         )
     })
 

@@ -25,7 +25,8 @@ For a start, import the `colors` helper and a colormap from `maps`:
 import {colors} from 'colormaps/index.js'
 import gray from 'colormaps/maps/mpl/gray.js'
 
-colors(3, gray)  // [[0, 0, 0], [.5, .5, .5], [1, 1, 1]]
+colors(3, gray)
+// [[0, 0, 0], [.5, .5, .5], [1, 1, 1]]
 ```
 
 ### Tuning colormaps
@@ -36,7 +37,11 @@ Some of the maps take parameters:
 import {colors} from 'colormaps/index.js'
 import cubehelix from 'colormaps/maps/mpl/cubehelix.js'
 
-colors(3, cubehelix, {gamma: 3, hue: 2})
+colors(3, cubehelix)
+// [[0, 0, 0], [.63, .47, .29], [1, 1, 1]]
+
+colors(3, cubehelix, {gamma: 1.1})
+// [[0, 0, 0], [.59, .44, .25], [1, 1, 1]]
 ```
 
 ### Styling HTML
